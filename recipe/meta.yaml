@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-    script: python setup.py install --single-version-externally-managed --record record.txt
+    script: {{PYTHON}} setup.py install --single-version-externally-managed --record record.txt
     number: 0
 
 requirements:
@@ -28,7 +28,9 @@ requirements:
 
 test:
   commands:
-    - "py.test --traceconfig | grep pytest-cov-{{version}}"
+    - "py.test --traceconfig | grep pytest-cov-{{version}}"                                 # [not win]
+    - py.test --traceconfig | findstr pytest-cov-{{version}} && (exit /b 0) || (exit /b 1)  # [win]
+
 
 about:
   home: https://github.com/pytest-dev/pytest-cov
