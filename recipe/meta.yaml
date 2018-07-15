@@ -30,7 +30,9 @@ requirements:
 
 test:
   commands:
-    - "py.test --traceconfig | grep pytest-cov-{{version}}"
+    - "py.test --traceconfig | grep pytest-cov-{{version}}"                                 # [not win]
+    - py.test --traceconfig | findstr pytest-cov-{{version}} && (exit /b 0) || (exit /b 1)  # [win]
+
 
 about:
   home: https://github.com/pytest-dev/pytest-cov
