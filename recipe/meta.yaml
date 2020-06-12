@@ -30,14 +30,23 @@ requirements:
 
 test:
   commands:
+<<<<<<< HEAD
     - pytest --traceconfig | grep pytest-cov-{{ version }}
+=======
+    - "pytest --traceconfig | grep pytest-cov-{{version}}"                                 # [not win]
+    - pytest --traceconfig | findstr pytest-cov-{{version}} && (exit /b 0) || (exit /b 1)  # [win]
+>>>>>>> 5bd48321ffd9f8b0546ed14f8d8cc163271658e1
 
 about:
   home: https://github.com/pytest-dev/pytest-cov
   license: MIT
   license_family: MIT
   license_file: LICENSE
+<<<<<<< HEAD
   summary: Pytest plugin for measuring coverage
+=======
+  summary: 'Pytest plugin for measuring coverage'
+>>>>>>> 5bd48321ffd9f8b0546ed14f8d8cc163271658e1
   description: |
     pytest-cov produces coverage reports.It supports centralised testing and
     distributed testing in both load and each modes.It also supports coverage
