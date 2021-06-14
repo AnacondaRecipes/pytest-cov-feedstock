@@ -21,12 +21,14 @@ requirements:
     - pip
     - python
     - setuptools
+    - wheel
 
   run:
     - python
     - setuptools
     - pytest >=4.6
     - coverage >=5.2.1
+    - toml
 
 test:
   commands:
