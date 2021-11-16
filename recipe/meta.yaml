@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  skip: True  # [py<36]
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   number: 0
@@ -22,16 +23,20 @@ requirements:
     - python
     - setuptools
     - wheel
-
   run:
-    - python
+    - python >=3.6
     - setuptools
     - pytest >=4.6
     - coverage >=5.2.1
     - toml
 
 test:
+  imports:
+    - pytest_cov
+  requires:
+    - pip
   commands:
+    - pip check
     - pytest --traceconfig | grep pytest-cov-{{ version }}
 
 about:
