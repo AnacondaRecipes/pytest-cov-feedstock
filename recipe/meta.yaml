@@ -46,6 +46,7 @@ about:
   license_file: LICENSE
   summary: Pytest plugin for measuring coverage
   dev_url: https://github.com/pytest-dev/pytest-cov
+  doc_url: https://pytest-cov.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
