@@ -35,6 +35,7 @@ test:
     - pytest_cov
   requires:
     - pip
+    - python <3.10
   commands:
     - pip check
     - pytest --traceconfig | grep pytest-cov-{{ version }}
