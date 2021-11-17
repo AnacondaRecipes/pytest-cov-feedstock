@@ -1,6 +1,6 @@
 {% set name = "pytest-cov" %}
-{% set version = "2.12.1" %}
-{% set sha256 = "261ceeb8c227b726249b376b8526b600f38667ee314f910353fa318caa01f4d7" %}
+{% set version = "3.0.0" %}
+{% set sha256 = "e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470" %}
 
 package:
   name: {{ name|lower }}
@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  skip: True  # [py<36]
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   number: 0
@@ -22,16 +23,21 @@ requirements:
     - python
     - setuptools
     - wheel
-
   run:
-    - python
+    - python >=3.6
     - setuptools
     - pytest >=4.6
     - coverage >=5.2.1
     - toml
 
 test:
+  imports:
+    - pytest_cov
+  requires:
+    - pip
+    - python <3.10
   commands:
+    - pip check
     - pytest --traceconfig | grep pytest-cov-{{ version }}
 
 about:
@@ -41,6 +47,7 @@ about:
   license_file: LICENSE
   summary: Pytest plugin for measuring coverage
   dev_url: https://github.com/pytest-dev/pytest-cov
+  doc_url: https://pytest-cov.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
