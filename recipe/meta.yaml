@@ -1,21 +1,18 @@
 {% set name = "pytest-cov" %}
-{% set version = "3.0.0" %}
-{% set sha256 = "e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470" %}
+{% set version = "4.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 996b79efde6433cdbd0088872dbc5fb3ed7fe1578b68cdbba634f14bb8dd0470
 
 build:
-  skip: True  # [py<36]
-  noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
   number: 0
+  skip: True  # [py<36]
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
@@ -24,8 +21,7 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python >=3.6
-    - setuptools
+    - python
     - pytest >=4.6
     - coverage >=5.2.1
     - toml
@@ -35,10 +31,10 @@ test:
     - pytest_cov
   requires:
     - pip
-    - python <3.10
+    - ripgrep
   commands:
     - pip check
-    - pytest --traceconfig | grep pytest-cov-{{ version }}
+    - pytest --traceconfig | rg pytest-cov-{{ version }}
 
 about:
   home: https://github.com/pytest-dev/pytest-cov
@@ -46,6 +42,12 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Pytest plugin for measuring coverage
+  description: |
+    This plugin produces coverage reports. Compared to just using coverage run this plugin does some extras:
+    * Subprocess support: you can fork or run stuff in a subprocess and will get covered without any fuss.
+    * Xdist support: you can use all of pytest-xdist's features and still get coverage.
+    * Consistent pytest behavior. If you run coverage run -m pytest you will have slightly different sys.path (CWD will be in it, unlike when running pytest).
+    All features offered by the coverage package should work, either through pytest-cov's command line options or through coverage's config file.
   dev_url: https://github.com/pytest-dev/pytest-cov
   doc_url: https://pytest-cov.readthedocs.io/en/latest/
 
