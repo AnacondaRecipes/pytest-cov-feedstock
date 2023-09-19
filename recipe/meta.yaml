@@ -1,23 +1,22 @@
 {% set name = "pytest-cov" %}
-{% set version = "4.0.0" %}
+{% set version = "4.1.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 996b79efde6433cdbd0088872dbc5fb3ed7fe1578b68cdbba634f14bb8dd0470
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pytest-cov-{{ version }}.tar.gz
+  sha256: 3904b13dfbfec47f003b8e77fd5b589cd11904a21ddf1ab38a64f204d6a10ef6
 
 build:
   number: 0
-  skip: True  # [py<36]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - pip
     - python
+    - pip
     - setuptools
     - wheel
   run:
@@ -49,7 +48,7 @@ about:
     * Consistent pytest behavior. If you run coverage run -m pytest you will have slightly different sys.path (CWD will be in it, unlike when running pytest).
     All features offered by the coverage package should work, either through pytest-cov's command line options or through coverage's config file.
   dev_url: https://github.com/pytest-dev/pytest-cov
-  doc_url: https://pytest-cov.readthedocs.io/en/latest/
+  doc_url: https://pytest-cov.readthedocs.io
 
 extra:
   recipe-maintainers:
