@@ -24,6 +24,7 @@ requirements:
     - pytest >=4.6
     - coverage >=5.2.1
     - toml
+    - py
 
 test:
   imports:
