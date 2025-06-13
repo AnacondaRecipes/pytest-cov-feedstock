@@ -1,29 +1,30 @@
 {% set name = "pytest-cov" %}
-{% set version = "6.0.0" %}
+{% set version = "6.2.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pytest-cov-{{ version }}.tar.gz
-  sha256: fde0b595ca248bb8e2d76f020b465f3b107c9632e6a1d1705f17834c89dcadc0
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytest_cov-{{ version }}.tar.gz
+  sha256: 25cc6cc0a5358204b8108ecedc51a9b57b34cc6b8c967cc2c01a4e00d8a67da2
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
 
 requirements:
   host:
     - python
     - pip
     - setuptools >=30.3.0
-    - wheel
   run:
     - python
-    - pytest >=4.6
+    - pytest >=6.2.5
     - coverage >=7.5
     - toml
+    - pluggy >=1.2
 
 test:
   imports:
