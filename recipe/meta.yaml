@@ -12,7 +12,8 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<39]
+  # latest version of the coverage 7.11.0 is not available for the py<310
+  skip: true  # [py<310]
 
 requirements:
   host:
