@@ -1,7 +1,6 @@
 {% set name = "pytest-cov" %}
 {% set version = "7.1.0" %}
 
-# Tests disabled. Reason - No module named 'process_tests' -> https://pypi.org/project/process-tests (pkg not in  the main channel)
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -13,8 +12,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  # latest version of the coverage 7.11.0 is not available for the py<310
-  skip: true  # [py<310]
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -29,6 +27,7 @@ requirements:
     - pytest >=7
     - pluggy >=1.2
 
+# Tests disabled. Reason - No module named 'process_tests' -> https://pypi.org/project/process-tests (pkg not in  the main channel)
 test:
   imports:
     - pytest_cov
